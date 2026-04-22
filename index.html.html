@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCA Institute - The Complete Training Platform for Merchant Cash Advance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a0f1a;
+  --navy-light: #111827;
+  --navy-mid: #1a2744;
+  --gold: #C9A84C;
+  --gold-dim: #9a7a3a;
+  --gold-glow: rgba(201, 168, 76, 0.15);
+  --white: #ffffff;
+  --white-90: rgba(255,255,255,0.9);
+  --white-60: rgba(255,255,255,0.6);
+  --white-30: rgba(255,255,255,0.3);
+  --white-10: rgba(255,255,255,0.08);
+  --white-05: rgba(255,255,255,0.04);
+  --coral: #E8593C;
+  --teal: #5DCAA5;
+  --blue: #4A90D9;
+  --purple: #8B6FD9;
+  --pink: #D4537E;
+  --amber: #EF9F27;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes barGrow {
+  from { width: 0; }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.1); }
+  50% { box-shadow: 0 0 40px rgba(201,168,76,0.25); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== NAV ========== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10, 15, 26, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--white-10);
+  transition: all 0.3s;
+}
+nav.scrolled {
+  padding: 12px 48px;
+  background: rgba(10, 15, 26, 0.95);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo .bar {
+  width: 4px;
+  height: 28px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+.nav-logo .mca {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--white);
+  letter-spacing: 2px;
+}
+.nav-logo .inst {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--white-60);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  padding: 10px 24px;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.nav-cta:hover {
+  background: #d4b35a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+}
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 140px 48px 80px;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(170deg, #0a0f1a 0%, #0d1a2e 40%, #0a1628 70%, #080d18 100%);
+  z-index: 0;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 60%, rgba(74, 144, 217, 0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 30% 40%, rgba(201, 168, 76, 0.05) 0%, transparent 50%);
+}
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: var(--gold-glow);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 100px;
+  margin-bottom: 36px;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-badge span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: clamp(42px, 6vw, 78px);
+  line-height: 1.05;
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s ease 0.15s both;
+}
+.hero h1 .accent {
+  color: var(--gold);
+  display: block;
+}
+.hero-sub {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--white-60);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  animation: fadeUp 0.8s ease 0.45s both;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-primary:hover {
+  background: #d4b35a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  background: transparent;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid var(--white-30);
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s ease 0.6s both;
+}
+.hero-stat {
+  font-size: 14px;
+  color: var(--white-60);
+  font-weight: 500;
+}
+.hero-stat strong {
+  color: var(--gold);
+}
+
+/* ========== PLATFORM PREVIEW ========== */
+.platform-section {
+  padding: 0 48px 100px;
+  position: relative;
+}
+.platform-preview {
+  max-width: 900px;
+  margin: -40px auto 0;
+  position: relative;
+  z-index: 3;
+  background: linear-gradient(145deg, rgba(17,24,39,0.95) 0%, rgba(10,15,26,0.98) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(201,168,76,0.12);
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03) inset;
+}
+.pp-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--white-10);
+  background: rgba(0,0,0,0.3);
+}
+.pp-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pp-logo .bar { width: 3px; height: 16px; background: var(--gold); border-radius: 2px; }
+.pp-logo span { font-size: 12px; font-weight: 700; color: var(--white); letter-spacing: 1px; }
+.pp-logo .g { color: var(--gold); font-weight: 500; }
+.pp-dots { display: flex; gap: 5px; }
+.pp-dots span { width: 8px; height: 8px; border-radius: 50%; opacity: 0.7; }
+.pp-tabs {
+  display: flex;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--white-10);
+  background: rgba(0,0,0,0.15);
+}
+.pp-tab {
+  padding: 11px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--white-30);
+  border-bottom: 2px solid transparent;
+  cursor: default;
+}
+.pp-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.pp-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--white-05);
+}
+.pp-stat {
+  padding: 18px 14px;
+  background: rgba(10,15,26,0.8);
+  text-align: center;
+}
+.pp-stat .val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+}
+.pp-stat .val em { font-style: normal; color: var(--gold); font-size: 16px; }
+.pp-stat .lbl {
+  font-size: 9px;
+  color: var(--white-30);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+.pp-tracks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px 24px 24px;
+}
+.pp-track {
+  background: var(--white-05);
+  border-radius: 10px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.3s;
+  cursor: default;
+}
+.pp-track:hover {
+  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+.pp-track-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.pp-track-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pp-track-icon {
+  font-size: 16px;
+  transition: filter 0.3s;
+}
+.pp-track:hover .pp-track-icon {
+  filter: drop-shadow(0 0 6px currentColor);
+}
+.pp-track-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.2;
+}
+.pp-track-slogan {
+  font-size: 11px;
+  color: var(--white-30);
+  font-style: italic;
+  margin-top: 2px;
+}
+.pp-track-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.pp-track-bar {
+  height: 3px;
+  background: var(--white-10);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.pp-track-fill {
+  height: 100%;
+  border-radius: 2px;
+  width: 0;
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pp-track-fill.animate { /* set by JS */ }
+.pp-cta-card {
+  background: linear-gradient(135deg, var(--gold-glow) 0%, rgba(201,168,76,0.02) 100%);
+  border-radius: 10px;
+  padding: 16px 18px;
+  border: 1px dashed rgba(201,168,76,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+.pp-cta-card .t { color: var(--gold); font-size: 13px; font-weight: 600; }
+.pp-cta-card .s { color: var(--white-30); font-size: 11px; }
+.pp-bottom {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), var(--gold), rgba(201,168,76,0.2), transparent);
+}
+
+/* ========== WHY SECTION ========== */
+.why-section {
+  padding: 100px 48px;
+  position: relative;
+}
+.why-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--white-10), transparent);
+}
+.section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 64px;
+  line-height: 1.2;
+}
+.why-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.why-card {
+  padding: 36px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid var(--white-10);
+  border-radius: 14px;
+  transition: all 0.4s;
+}
+.why-card:hover {
+  border-color: var(--gold-glow);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+.why-card-icon {
+  font-size: 24px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+.why-card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+.why-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--white-60);
+}
+
+/* ========== PRICING ========== */
+.pricing-section {
+  padding: 100px 48px;
+  position: relative;
+  background: linear-gradient(180deg, var(--navy) 0%, rgba(17,24,39,0.5) 50%, var(--navy) 100%);
+}
+.pricing-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--white-10), transparent);
+}
+.pricing-grid {
+  max-width: 1060px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.pricing-card {
+  background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid var(--white-10);
+  border-radius: 16px;
+  padding: 40px 32px;
+  transition: all 0.4s;
+  position: relative;
+}
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+}
+.pricing-card.featured {
+  border-color: var(--gold);
+  background: linear-gradient(160deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.02) 100%);
+  animation: pulseGlow 4s ease infinite;
+}
+.pricing-card.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  padding: 5px 16px;
+  border-radius: 100px;
+}
+.pricing-tier {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.pricing-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.pricing-desc {
+  font-size: 14px;
+  color: var(--white-60);
+  margin-bottom: 24px;
+  min-height: 40px;
+}
+.pricing-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.pricing-price span { font-size: 18px; font-weight: 400; color: var(--white-60); }
+.pricing-period {
+  font-size: 14px;
+  color: var(--white-30);
+  margin-bottom: 28px;
+}
+.pricing-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  margin-bottom: 28px;
+}
+.pricing-card.featured .pricing-btn {
+  background: var(--gold);
+  color: var(--navy);
+}
+.pricing-card.featured .pricing-btn:hover {
+  background: #d4b35a;
+  box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+}
+.pricing-card:not(.featured) .pricing-btn {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--white-30);
+}
+.pricing-card:not(.featured) .pricing-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.pricing-features { list-style: none; }
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--white-60);
+  border-bottom: 1px solid var(--white-05);
+}
+.pricing-features li:last-child { border: none; }
+.pricing-features li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border-radius: 50%;
+  background: rgba(93,202,165,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 8l2 2 4-4' stroke='%235DCAA5' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px;
+}
+
+/* ========== CTA ========== */
+.cta-section {
+  padding: 100px 48px;
+  text-align: center;
+  position: relative;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--white-10), transparent);
+}
+.cta-section h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.cta-section h2 .accent { color: var(--gold); }
+.cta-section p {
+  font-size: 18px;
+  color: var(--white-60);
+  max-width: 520px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+.cta-contact {
+  color: var(--white-30);
+  font-size: 14px;
+  margin-top: 24px;
+}
+.cta-contact a { color: var(--gold); text-decoration: none; }
+.cta-contact a:hover { text-decoration: underline; }
+
+/* ========== FOOTER ========== */
+footer {
+  padding: 40px 48px;
+  border-top: 1px solid var(--white-10);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer .copy { font-size: 13px; color: var(--white-30); }
+footer .links { display: flex; gap: 24px; }
+footer .links a { font-size: 13px; color: var(--white-30); text-decoration: none; }
+footer .links a:hover { color: var(--gold); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  nav { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 120px 24px 60px; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .hero-stats { flex-direction: column; gap: 8px; }
+  .platform-section { padding: 0 16px 60px; }
+  .pp-stats { grid-template-columns: repeat(2, 1fr); }
+  .pp-tracks { grid-template-columns: 1fr; }
+  .why-section { padding: 60px 24px; }
+  .why-grid { grid-template-columns: 1fr; }
+  .pricing-section { padding: 60px 24px; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .cta-section { padding: 60px 24px; }
+  footer { padding: 30px 24px; flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="bar"></div>
+    <span class="mca">MCA</span>
+    <span class="inst">Institute</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#why">About</a></li>
+    <li><a href="#pricing">Membership</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#pricing" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span>Industry-First Training Platform</span>
+    </div>
+    <h1>
+      The Complete<br>Training Platform
+      <span class="accent">for Merchant<br>Cash Advance.</span>
+    </h1>
+    <p class="hero-sub">Seven professional tracks. 140 modules. Built by an operator who ran every department, from sales to compliance to collections.</p>
+    <div class="hero-buttons">
+      <a href="#pricing" class="btn-primary">Explore Membership</a>
+      <a href="#pricing" class="btn-secondary">View Pricing</a>
+    </div>
+    <div class="hero-stats">
+      <span class="hero-stat"><strong>7</strong> tracks</span>
+      <span class="hero-stat" style="color:var(--white-30);">/</span>
+      <span class="hero-stat"><strong>140</strong> modules</span>
+      <span class="hero-stat" style="color:var(--white-30);">/</span>
+      <span class="hero-stat"><strong>The only</strong> MCA-specific training platform</span>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM PREVIEW -->
+<section class="platform-section">
+  <div class="platform-preview reveal">
+    <div class="pp-topbar">
+      <div class="pp-logo"><div class="bar"></div><span>MCA</span>&nbsp;<span class="g">Institute</span></div>
+      <div class="pp-dots">
+        <span style="background:var(--coral);"></span>
+        <span style="background:var(--amber);"></span>
+        <span style="background:var(--teal);"></span>
+      </div>
+    </div>
+    <div class="pp-tabs">
+      <div class="pp-tab active">Course Tracks</div>
+      <div class="pp-tab">Resource Vault</div>
+      <div class="pp-tab">Community</div>
+    </div>
+    <div class="pp-stats">
+      <div class="pp-stat"><div class="val">7</div><div class="lbl">Course Tracks</div></div>
+      <div class="pp-stat"><div class="val">140<em>+</em></div><div class="lbl">Total Modules</div></div>
+      <div class="pp-stat"><div class="val">50<em>+</em></div><div class="lbl">Downloadable Tools</div></div>
+      <div class="pp-stat"><div class="val">&mdash;</div><div class="lbl">Active Members</div></div>
+    </div>
+    <div class="pp-tracks" id="trackGrid">
+      <!-- Filled by JS -->
+    </div>
+    <div class="pp-bottom"></div>
+  </div>
+</section>
+
+<!-- WHY SECTION -->
+<section class="why-section" id="why">
+  <div class="section-label reveal">Why MCA Institute</div>
+  <h2 class="section-title reveal">Everything you need to run<br>an MCA business. <span style="color:var(--gold);">All in one place.</span></h2>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-card-icon" style="color:var(--gold);">&#9670;</div>
+      <h3>Complete MCA Business Training</h3>
+      <p>Seven professional tracks covering every department: compliance, operations, sales, underwriting, servicing, accounting, and marketing. 140 modules built by someone who ran it all.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-card-icon" style="color:var(--teal);">&#9671;</div>
+      <h3>Real Operator, Real Systems</h3>
+      <p>Every lesson comes from live operations. SOPs, CRM logic, deal flow systems, reconciliation workflows, and compliance protocols pulled from a $36M portfolio.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-card-icon" style="color:var(--coral);">&#9674;</div>
+      <h3>Tools You Can Use Today</h3>
+      <p>Scripts, templates, trackers, checklists, and automation blueprints you download and deploy immediately. The Resource Vault alone is worth the membership.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-card-icon" style="color:var(--blue);">&#9673;</div>
+      <h3>Learn on Your Schedule</h3>
+      <p>Self-paced access through our learning portal. Course tracks, community discussions, deal reviews, and regulatory updates, all from anywhere.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-label reveal">Membership</div>
+  <h2 class="section-title reveal">Choose Your Path</h2>
+  <p style="text-align:center;color:var(--white-60);font-size:17px;max-width:520px;margin:-40px auto 60px;line-height:1.7;" class="reveal">Three tiers. Full access to the only MCA-specific training platform in the industry.</p>
+  <div class="pricing-grid">
+    <!-- ESSENTIALS -->
+    <div class="pricing-card reveal">
+      <div class="pricing-tier">Starter</div>
+      <div class="pricing-name">Essentials</div>
+      <div class="pricing-desc">Reference library, templates, and community access.</div>
+      <div class="pricing-price">$49 <span>/mo</span></div>
+      <div class="pricing-period">Billed monthly. Cancel anytime.</div>
+      <a href="#" class="pricing-btn">Subscribe</a>
+      <ul class="pricing-features">
+        <li>Scripts, SOPs, and Templates</li>
+        <li>State compliance reference library</li>
+        <li>Regulatory update alerts</li>
+        <li>Community access and Job Board</li>
+        <li>Downloadable tools and trackers</li>
+      </ul>
+    </div>
+    <!-- FULL ACADEMY -->
+    <div class="pricing-card featured reveal">
+      <div class="pricing-tier">Full Access</div>
+      <div class="pricing-name">Full Academy</div>
+      <div class="pricing-desc">All 7 course tracks, community, and every resource we offer.</div>
+      <div class="pricing-price">$149 <span>/mo</span></div>
+      <div class="pricing-period">Billed monthly. Cancel anytime.</div>
+      <a href="#" class="pricing-btn">Subscribe</a>
+      <ul class="pricing-features">
+        <li>Everything in Essentials</li>
+        <li>All 7 course tracks (140 modules)</li>
+        <li>Deal Clinic and case reviews</li>
+        <li>Automation Lab</li>
+        <li>Voice Notes from Arlena</li>
+        <li>The Syndicate Club</li>
+      </ul>
+    </div>
+    <!-- INNER CIRCLE -->
+    <div class="pricing-card reveal">
+      <div class="pricing-tier">Advisory</div>
+      <div class="pricing-name">Inner Circle</div>
+      <div class="pricing-desc">Everything plus direct 1-on-1 access. Limited to 10 members.</div>
+      <div class="pricing-price">$597 <span>/mo</span></div>
+      <div class="pricing-period">Billed monthly. Application required.</div>
+      <a href="#" class="pricing-btn">Apply Now</a>
+      <ul class="pricing-features">
+        <li>Everything in Full Academy</li>
+        <li>Two 1-on-1 calls per month</li>
+        <li>Direct messaging access</li>
+        <li>Deal and document review</li>
+        <li>Priority compliance questions</li>
+        <li>Limited to 10 members</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2 class="reveal">Ready to Set<br><span class="accent">the Standard?</span></h2>
+  <p class="reveal">Join the first cohort of MCA professionals earning access to the industry's only dedicated training platform. Enrollment is open now.</p>
+  <div class="reveal">
+    <a href="#pricing" class="btn-primary" style="font-size:15px;padding:18px 44px;">Start Your Membership</a>
+  </div>
+  <p class="cta-contact reveal">Questions? <a href="mailto:systems@mcainstitute.com">systems@mcainstitute.com</a></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="copy">&copy; 2026 MCA Institute. All rights reserved.</div>
+  <div class="links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="mailto:systems@mcainstitute.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Platform preview tracks
+const tracks = [
+  { name: "Compliance", slogan: "The Operating System", icon: "\u2B21", color: "#C9A84C", accent: "#2a2210", modules: 20, progress: 87 },
+  { name: "Operations", slogan: "Systems That Scale", icon: "\u25C8", color: "#4A90D9", accent: "#0f1f33", modules: 20, progress: 72 },
+  { name: "Sales", slogan: "The Deal Closer's Handbook", icon: "\u25C6", color: "#E8593C", accent: "#2d1410", modules: 20, progress: 94 },
+  { name: "Underwriting", slogan: "Risk with Precision", icon: "\u25C7", color: "#5DCAA5", accent: "#0f2a22", modules: 20, progress: 61 },
+  { name: "Servicing", slogan: "Protecting the Portfolio", icon: "\u25A3", color: "#D4537E", accent: "#2a1220", modules: 20, progress: 45 },
+  { name: "Accounting", slogan: "The Financial Backbone", icon: "\u25B3", color: "#8B6FD9", accent: "#1a1530", modules: 20, progress: 78 },
+  { name: "Marketing", slogan: "Amplify the Brand", icon: "\u25CE", color: "#EF9F27", accent: "#2d2008", modules: 20, progress: 53 },
+];
+
+const grid = document.getElementById('trackGrid');
+tracks.forEach((t, i) => {
+  const el = document.createElement('div');
+  el.className = 'pp-track';
+  el.innerHTML = `
+    <div class="pp-track-top">
+      <div class="pp-track-info">
+        <span class="pp-track-icon" style="color:${t.color}">${t.icon}</span>
+        <div>
+          <div class="pp-track-name">${t.name}</div>
+          <div class="pp-track-slogan">${t.slogan}</div>
+        </div>
+      </div>
+      <span class="pp-track-badge" style="color:${t.color};background:${t.color}15">${t.modules} modules</span>
+    </div>
+    <div class="pp-track-bar">
+      <div class="pp-track-fill" style="background:linear-gradient(90deg,${t.color}88,${t.color})" data-width="${t.progress}%"></div>
+    </div>`;
+  grid.appendChild(el);
+});
+// CTA card
+const cta = document.createElement('div');
+cta.className = 'pp-cta-card';
+cta.innerHTML = '<div class="t">Start Learning Today</div><div class="s">140 modules across 7 tracks</div>';
+grid.appendChild(cta);
+
+// Animate track bars on scroll
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.pp-track-fill').forEach((bar, i) => {
+        setTimeout(() => { bar.style.width = bar.dataset.width; }, i * 100);
+      });
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+barObserver.observe(grid);
+</script>
+
+</body>
+</html>
