@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inner Circle Application — MCA Institute</title>
+<style>
+  :root {
+    --navy: #0a0f1a;
+    --gold: #C9A84C;
+    --gold-hover: #d4b55d;
+    --text: #e8e8e8;
+    --text-dim: #a0a0a0;
+    --border: #1f2636;
+    --error: #e85d5d;
+    --success: #5dc08a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    padding: 60px 20px;
+  }
+  .container { max-width: 640px; margin: 0 auto; }
+  .logo { font-size: 14px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 40px; }
+  h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .subtitle { color: var(--text-dim); margin-bottom: 48px; font-size: 16px; }
+  .field { margin-bottom: 28px; }
+  label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: var(--text); }
+  .label-note { color: var(--text-dim); font-weight: 400; font-size: 13px; }
+  input[type="text"], input[type="email"], input[type="url"], select, textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: inherit;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); }
+  select { appearance: none; background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
+  select:invalid { color: var(--text-dim); }
+  option { background: var(--navy); color: var(--text); }
+  textarea { resize: vertical; min-height: 100px; }
+  button {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+  }
+  button:hover:not(:disabled) { background: var(--gold-hover); }
+  button:disabled { opacity: 0.6; cursor: not-allowed; }
+  .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .status { margin-top: 20px; padding: 14px; border-radius: 4px; display: none; }
+  .status.success { display: block; background: rgba(93, 192, 138, 0.1); border: 1px solid var(--success); color: var(--success); }
+  .status.error { display: block; background: rgba(232, 93, 93, 0.1); border: 1px solid var(--error); color: var(--error); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">MCA Institute</div>
+  <h1>Inner Circle Application</h1>
+  <p class="subtitle">Inner Circle is capped at 10 members. Please answer honestly. Applications take 5 to 8 minutes.</p>
+  <form id="applicationForm">
+    <div class="field">
+      <label>Full Name</label>
+      <input type="text" name="name" required autocomplete="name">
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" name="email" required autocomplete="email">
+    </div>
+    <div class="field">
+      <label>Company</label>
+      <input type="text" name="company" required autocomplete="organization">
+    </div>
+    <div class="field">
+      <label>Role / Title</label>
+      <input type="text" name="role" required autocomplete="organization-title">
+    </div>
+    <div class="field">
+      <label>Website or LinkedIn URL</label>
+      <input type="url" name="website" required placeholder="https://">
+    </div>
+    <div class="field">
+      <label>Which best describes you?</label>
+      <select name="applicant_type" required>
+        <option value="" disabled selected>Select one</option>
+        <option>Shop owner / Principal</option>
+        <option>ISO / Broker</option>
+        <option>Funder / Underwriter</option>
+        <option>Syndicator / Investor</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>How long have you been in MCA?</label>
+      <input type="text" name="years_in_mca" required placeholder="e.g., 3 years">
+    </div>
+    <div class="field">
+      <label>What's the single biggest operational or compliance question you need answered in the next 90 days?</label>
+      <textarea name="biggest_question" required></textarea>
+    </div>
+    <div class="field">
+      <label>What have you tried so far?</label>
+      <textarea name="tried_so_far" required></textarea>
+    </div>
+    <div class="field">
+      <label>What would make this a waste of $597/month for you?</label>
+      <textarea name="waste_scenario" required></textarea>
+    </div>
+    <div class="field">
+      <label>Monthly deal volume or funded AUM <span class="label-note">(optional)</span></label>
+      <input type="text" name="deal_volume_text">
+    </div>
+    <div class="field">
+      <label>Anything else I should know? <span class="label-note">(optional)</span></label>
+      <textarea name="additional_notes"></textarea>
+    </div>
+    <!-- Honeypot: bots fill this, humans don't see it. Submission silently fails if populated. -->
+    <div class="honeypot" aria-hidden="true">
+      <label>Leave this empty</label>
+      <input type="text" name="website_url" tabindex="-1" autocomplete="off">
+    </div>
+    <button type="submit" id="submitBtn">Submit Application</button>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+  </form>
+</div>
+<script>
+// Apps Script Web App URL (the /exec endpoint from your deployment)
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyF4xu6DloA4LN_QkdWAsy1OmI_MjEfiv7uHDMdPVDwU3rBsZmQEbxPi-IEcjdKU1gvrQ/exec';
+// This form is for Inner Circle applications. When you build a different-tier
+// interest form later, copy this file, change TIER below, strip the IC-specific
+// questions, and point at the same SCRIPT_URL.
+const TIER = 'Inner Circle';
+// Capture attribution signals from URL and referrer. Invisible to applicant.
+function captureAttribution() {
+  const params = new URLSearchParams(window.location.search);
+  const utm_source = params.get('utm_source') || '';
+  const utm_medium = params.get('utm_medium') || '';
+  const utm_campaign = params.get('utm_campaign') || '';
+  const sourceParam = params.get('source') || '';
+  const referrer_url = document.referrer || '';
+  // Resolve source: explicit ?source= > utm_source > referrer domain > "direct"
+  let source = sourceParam || utm_source;
+  if (!source && referrer_url) {
+    try { source = new URL(referrer_url).hostname; }
+    catch (e) { /* malformed referrer, ignore */ }
+  }
+  if (!source) source = 'direct';
+  return { source, utm_source, utm_medium, utm_campaign, referrer_url };
+}
+document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = document.getElementById('submitBtn');
+  const status = document.getElementById('status');
+  // Honeypot check: if populated, a bot filled the form
+  if (form.website_url.value) return;
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+  status.className = 'status';
+  const payload = Object.fromEntries(new FormData(form).entries());
+  delete payload.website_url;
+  payload.tier = TIER;
+  Object.assign(payload, captureAttribution());
+  payload.submitted_at = new Date().toISOString();
+  try {
+    // text/plain avoids CORS preflight with Apps Script Web Apps
+    const res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    const json = await res.json();
+    if (json.ok) {
+      status.className = 'status success';
+      status.textContent = 'Application received. You\'ll hear back within 3 business days.';
+      form.reset();
+      btn.textContent = 'Submitted';
+    } else {
+      throw new Error(json.error || 'Unknown error');
+    }
+  } catch (err) {
+    status.className = 'status error';
+    status.textContent = 'Submission failed. Please email systems@mcainstitute.com directly.';
+    btn.disabled = false;
+    btn.textContent = 'Submit Application';
+  }
+});
+</script>
+</body>
+</html>
