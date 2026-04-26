@@ -7,6 +7,7 @@
 <style>
   :root {
     --navy: #0a0f1a;
+    --navy-light: #1a2438;
     --gold: #C9A84C;
     --gold-hover: #d4b55d;
     --text: #e8e8e8;
@@ -16,12 +17,16 @@
     --success: #5dc08a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--navy); }
   body {
-    background: var(--navy);
+    background: radial-gradient(ellipse at top, var(--navy-light) 0%, var(--navy) 60%);
+    background-attachment: fixed;
+    background-color: var(--navy);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     line-height: 1.6;
     padding: 60px 20px;
+    min-height: 100vh;
   }
   .container { max-width: 640px; margin: 0 auto; }
   .logo { font-size: 14px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 40px; }
@@ -92,7 +97,7 @@
     </div>
     <div class="field">
       <label>Website or LinkedIn URL</label>
-      <input type="url" name="website" required placeholder="https://">
+      <input type="text" name="website" required placeholder="e.g., example.com">
     </div>
     <div class="field">
       <label>Which best describes you?</label>
@@ -110,6 +115,10 @@
       <input type="text" name="years_in_mca" required placeholder="e.g., 3 years">
     </div>
     <div class="field">
+      <label>Monthly deal volume or active portfolio size <span class="label-note">(optional)</span></label>
+      <input type="text" name="deal_volume_text" placeholder="e.g., $2M/mo or $15M active">
+    </div>
+    <div class="field">
       <label>What's the single biggest operational or compliance question you need answered in the next 90 days?</label>
       <textarea name="biggest_question" required></textarea>
     </div>
@@ -120,10 +129,6 @@
     <div class="field">
       <label>What would make this a waste of $597/month for you?</label>
       <textarea name="waste_scenario" required></textarea>
-    </div>
-    <div class="field">
-      <label>Monthly deal volume or funded AUM <span class="label-note">(optional)</span></label>
-      <input type="text" name="deal_volume_text">
     </div>
     <div class="field">
       <label>Anything else I should know? <span class="label-note">(optional)</span></label>
@@ -145,6 +150,16 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyF4xu6DloA4LN_QkdWA
 // interest form later, copy this file, change TIER below, strip the IC-specific
 // questions, and point at the same SCRIPT_URL.
 const TIER = 'Inner Circle';
+// Accept any reasonable URL input. Auto-prefix https:// if missing protocol.
+// "www.example.com" -> "https://www.example.com"
+// "example.com"     -> "https://example.com"
+// "https://x.com"   -> unchanged
+function normalizeUrl(value) {
+  if (!value) return '';
+  const trimmed = value.trim();
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return 'https://' + trimmed;
+}
 // Capture attribution signals from URL and referrer. Invisible to applicant.
 function captureAttribution() {
   const params = new URLSearchParams(window.location.search);
@@ -174,6 +189,7 @@ document.getElementById('applicationForm').addEventListener('submit', async func
   status.className = 'status';
   const payload = Object.fromEntries(new FormData(form).entries());
   delete payload.website_url;
+  payload.website = normalizeUrl(payload.website);
   payload.tier = TIER;
   Object.assign(payload, captureAttribution());
   payload.submitted_at = new Date().toISOString();
@@ -195,7 +211,7 @@ document.getElementById('applicationForm').addEventListener('submit', async func
     }
   } catch (err) {
     status.className = 'status error';
-    status.textContent = 'Submission failed. Please email systems@mcainstitute.com directly.';
+    status.textContent = 'Submission failed. Please email info@mcainstitute.com directly.';
     btn.disabled = false;
     btn.textContent = 'Submit Application';
   }
